@@ -80,6 +80,9 @@ Spring Batch Application Properties
 
 | Property                                           | Description                                               |
 |----------------------------------------------------|-----------------------------------------------------------|
+| quartz.enabled                                     | Flag to enable or disable cron                            |
+| loadMaster.cron                                    | Cron expression for LoadMasterData job                    |
+| quartetMatch.cron                                  | Cron expression for quartetMatch job                      |  
 | app.datasource.[main, qt].[url,username, password] | Data source specific info for main_data and qt datasource |
 | api.url                                            | API Url to fetch master data from                         |
 | smtp.enabled                                       | Flag to enable/disable smtp emails                        |
@@ -129,7 +132,7 @@ Spring Batch Application Properties
     This is done independently for both match and update jobs.
 
 
-##### What if instead of a nightly feed, data was streamed to you in real time? Talk about how you may change your design to support such a need - diagrams help too!
+### What if instead of a nightly feed, data was streamed to you in real time? Talk about how you may change your design to support such a need - diagrams help too!
 
 ![Streaming Architecture](https://s3.amazonaws.com/qt-imgs/StreamingArch.png)
 
