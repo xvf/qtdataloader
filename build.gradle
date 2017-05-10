@@ -1,0 +1,59 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.3.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath('se.transmode.gradle:gradle-docker:1.2')
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+//apply plugin: 'war'
+apply plugin: 'docker'
+
+group = 'xvfs'
+version = '0.1.0'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+jar {
+    baseName = 'qtdataloader'
+    version =  '0.1.0'
+}
+
+task buildDocker(type: Docker, dependsOn: build) {
+    push = false
+    applicationName = jar.baseName
+    dockerfile = file('src/main/docker/Dockerfile')
+    doFirst {
+        copy {
+            from jar
+            into stageDir
+        }
+    }
+}
+
+dependencies {
+    compile('org.springframework.boot:spring-boot:1.5.3.RELEASE')
+	compile('org.springframework.boot:spring-boot-starter-batch')
+    compile('org.quartz-scheduler:quartz:1.8.5')
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '1.5.3.RELEASE'
+    compile group: 'mysql', name: 'mysql-connector-java', version: '6.0.6'
+    compile group: 'org.springframework', name: 'spring-context-support', version: '3.2.0.RELEASE'
+    compile group: 'javax.mail', name: 'mail', version: '1.4'
+    compile group: 'commons-codec', name: 'commons-codec', version: '1.9'
+
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+//    providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
+
+}
