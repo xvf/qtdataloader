@@ -28,6 +28,11 @@ Follow these steps to get the application running.
 
 ```
 
+### Observing Output
+
+- After running the application, the loadMasterdata job will load the data from the JSON api and add it to the _NYC_MASTER_CLINIC_DATA_ table in the master_data database.
+- The matchQtClinics job will match quartet data from the CLINIC_DATA table in the qt database to the master data. Since the quartet data has been preloaded with a few entries, after the job ends, a few of the clinics on the _NYC_MASTER_CLINIC_DATA_ table should have active flag set to true.
+
 ### Solution Outline
 In order to create a scheduled synchronus job to sync data between the NYC gov data source and database, a spring batch application is created.
 The application consists of two jobs, both use a quartz cron trigger to run them.
