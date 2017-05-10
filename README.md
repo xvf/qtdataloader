@@ -1,4 +1,4 @@
-# NYC Clinic Data Loader
+# NYC Clinic Data Loader  [![Build Status](https://travis-ci.org/xvf/qtdataloader.svg?branch=master)](https://travis-ci.org/xvf/qtdataloader)
 
 ### Objective
 To augment our application data, we want to pull the full list of all behavioral health facilities in NYC into our platform.
